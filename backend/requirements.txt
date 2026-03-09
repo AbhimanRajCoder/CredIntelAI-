@@ -1,0 +1,54 @@
+# Core Framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+gunicorn==23.0.0
+
+# Pydantic
+pydantic==2.12.5
+pydantic-settings==2.7.1
+
+# LangGraph & LangChain
+langgraph==0.2.60
+langchain==0.3.13
+langchain-groq==0.2.4
+langchain-community==0.3.13
+langchain-core>=0.3.0,<0.4.0
+
+# LLM Provider
+groq==0.15.0
+
+# Vector Store
+pinecone-client==5.0.1
+langchain-huggingface==0.1.2
+sentence-transformers>=2.6.0
+
+# Document Parsing
+pdfplumber==0.11.4
+paddleocr==2.9.1
+paddlepaddle==3.0.0
+
+# Web Search
+google-search-results==2.4.2
+
+# Supabase
+supabase==2.13.0
+websockets==15.0
+
+# Redis (shared state across workers)
+redis[hiredis]>=5.0.0
+
+# Auth
+PyJWT>=2.8.0
+
+# Utilities
+httpx==0.28.1
+python-dotenv==1.0.1
+aiofiles==24.1.0
+uuid6==2024.7.10
+numpy==1.26.4
+
+# Testing
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+httpx>=0.28.0
