@@ -35,6 +35,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy installed Python packages from builder
 COPY --from=builder /install /usr/local
 
+# Pre-download embedding model to bake into the image (prevents slow downloads in deployment)
+RUN python -c "from langchain_huggingface import HuggingFaceEmbeddings; HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')"
+
 # Copy application code
 COPY . .
 

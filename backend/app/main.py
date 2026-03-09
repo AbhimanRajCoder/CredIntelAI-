@@ -145,6 +145,17 @@ app.add_middleware(
 )
 
 
+# ─── Pre-warm Singletons ─────────────────────────────────────────────────────
+# When preload_app=True in Gunicorn, this loads the model once in the master process
+# so it's shared across all workers (Copy-on-Write), saving RAM and startup time.
+from app.db.pinecone_store import get_pinecone_store
+try:
+    logger.info("Pre-warming PineconeStore and Embedding Model...")
+    _ = get_pinecone_store().embeddings
+except Exception as e:
+    logger.error(f"Failed to pre-warm PineconeStore: {e}")
+
+
 # ─── Background Task Runner ──────────────────────────────────────────────────
 
 async def _run_workflow_background(

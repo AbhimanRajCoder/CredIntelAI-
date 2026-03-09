@@ -23,14 +23,19 @@ class PineconeStore:
         self.settings = get_settings()
         self._pc: Optional[Pinecone] = None
         self._index = None
-        
-        # Initialize embeddings model
-        logger.info(f"Loading embedding model: {self.settings.EMBEDDING_MODEL}...")
-        self.embeddings = HuggingFaceEmbeddings(
-            model_name=self.settings.EMBEDDING_MODEL,
-            model_kwargs={'device': 'cpu'},
-            encode_kwargs={'normalize_embeddings': True}
-        )
+        self._embeddings = None
+
+    @property
+    def embeddings(self) -> HuggingFaceEmbeddings:
+        """Lazy-initialize embeddings model."""
+        if self._embeddings is None:
+            logger.info(f"Loading embedding model: {self.settings.EMBEDDING_MODEL}...")
+            self._embeddings = HuggingFaceEmbeddings(
+                model_name=self.settings.EMBEDDING_MODEL,
+                model_kwargs={'device': 'cpu'},
+                encode_kwargs={'normalize_embeddings': True}
+            )
+        return self._embeddings
 
     @property
     def pc(self) -> Pinecone:

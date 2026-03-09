@@ -22,6 +22,7 @@ bind = f"{os.getenv('HOST', '0.0.0.0')}:{os.getenv('PORT', '8000')}"
 
 worker_class = "uvicorn.workers.UvicornWorker"
 workers = int(os.getenv("WORKERS", min(multiprocessing.cpu_count() * 2 + 1, 4)))
+preload_app = True  # Load app once before forking workers to save RAM and startup time
 
 # ─── Worker Lifecycle ─────────────────────────────────────────────────────────
 
